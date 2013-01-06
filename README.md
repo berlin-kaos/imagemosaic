@@ -2,5 +2,5 @@ imagemosaic
 ===========
 
 requires: 
-* ImageMagick (http://www.imagemagick.org)
+* ImageMagick including development headers and libraries (http://www.imagemagick.org)
 * CMake (http://www.cmake.org/)
