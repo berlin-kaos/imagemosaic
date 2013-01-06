@@ -1,4 +1,6 @@
 imagemosaic
 ===========
 
-requires: ImageMagick (http://www.imagemagick.org)
+requires: 
+* ImageMagick (http://www.imagemagick.org)
+* CMake (http://www.cmake.org/)
