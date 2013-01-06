@@ -1,3 +1,4 @@
 imagemosaic
 ===========
-TBA
+
+requires: ImageMagick (http://www.imagemagick.org)
