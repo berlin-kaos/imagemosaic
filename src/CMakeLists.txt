@@ -1,4 +1,5 @@
 set(CMAKE_C_FLAGS "-Wall -g")
+set(Boost_USE_STATIC_LIBS ON)
 
 file(GLOB SRCS *.c *.h *.cpp)
 

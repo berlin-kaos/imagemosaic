@@ -44,6 +44,7 @@ const globalArgs_t parse_arguments(const int argc, char* argv[]) {
 	
 	// set default values for optional arguments
 	globalArgs.verbose = true;
+	globalArgs.image_directory = "";
 		
 	if (globalArgs.verbose) {
 		printf("received the following parameters:\n");
