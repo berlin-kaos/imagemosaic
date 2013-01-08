@@ -7,10 +7,10 @@ namespace po = boost::program_options;
 
 /* imagemosaic supports the following command-line arguments:
  *
- * --image-directories, -I : (required) path to directory containing images for creating the mosaic
- * --verbose               : (optional) enable verbosity
- * --version               : print version
- * --help, -h              : print usage
+ * --image-directory, -I : (required) path to directory containing images for creating the mosaic
+ * --verbose             : (optional) enable verbosity
+ * --version             : print version
+ * --help, -h            : print usage
  */
 struct globalArgs_t {
 	std::string image_directory;
