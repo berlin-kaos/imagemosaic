@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <boost/program_options.hpp>
-#include <Magick++.h>
+#include <opencv2/opencv.hpp>
 
 namespace po = boost::program_options;
 
@@ -59,16 +59,19 @@ const globalArgs_t parse_arguments(const int argc, char* argv[]) {
 	generic.add_options()
 		("help,h", "produce help message")
 		("version,v", "show version")
-		("verbose", po::value<bool>(&(globalArgs.verbose))->default_value(false)->zero_tokens(), "enable verbosity")
+		("verbose", po::value<bool>(&(globalArgs.verbose))->default_value(true)->zero_tokens(), "enable verbosity")
 	;
 	
 	config.add_options()
 		("image-directory,I", po::value< std::string >(&(globalArgs.image_directory))->required(), "image directory containing images to use")
+		("target-image,T", po::value< std::string >(&(globalArgs.target_image))->required(), "target image to produce")
 	;
 	
+	/*
 	hidden.add_options()
 		("target-image,T", po::value< std::string >(&(globalArgs.target_image))->required(), "target image to produce")
 	;
+	*/
 	
 	po::positional_options_description pop;
 	pop.add("target-image", 1);
@@ -94,7 +97,7 @@ const globalArgs_t parse_arguments(const int argc, char* argv[]) {
 		printf("received the following parameters:\n");
 		printf("\tverbose: %s\n", globalArgs.verbose ? "true" : "false");
 		printf("\timage-directories: %s\n", globalArgs.image_directory.c_str());
-		printf("\ttarget-image: %s", globalArgs.target_image.c_str());
+		printf("\ttarget-image: %s\n", globalArgs.target_image.c_str());
 	}
 	
 	return globalArgs;
@@ -106,11 +109,22 @@ int main(int argc, char* argv[]) {
 	const globalArgs_t args = parse_arguments(argc, argv);
 	
 	// test if setup is really working...
-	Magick::Image image;
+	const std::string window_name = "Image Display";
+	const std::string image_name = "../../DSC_9978.JPG";
+	cv::Mat image = cv::imread(image_name, cv::IMREAD_UNCHANGED);
+	if (!image.data) {
+		printf("image not found\n");
+	} else {
+		cv::namedWindow(window_name, CV_WINDOW_AUTOSIZE);
+		cv::imshow(window_name, image);
+		
+		printf("press ENTER to continue\n");
+		std::cin.ignore();
+	}
 	
 	// done!
 	if (args.verbose) {
-		puts("exiting program");
+		printf("exiting program\n");
 	}
 	
 	exit(EXIT_SUCCESS);
